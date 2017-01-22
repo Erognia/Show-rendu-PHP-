@@ -1,0 +1,20 @@
+{% extends 'AppBundle::layout.html.twig' %}
+
+{% block menu_calendar %}active{% endblock %}
+
+{% block contents %}
+    <section>
+    	<div class="container">
+    		<h3 class="text-center" style="margin-bottom:30px;">Aujourd'hui : {{dateActuelle}}</h3>
+    		{% for episode in episodes %}
+    			<ul>
+    				{% if "now"|date('Ymd')  <= episode.date|date('Ymd') %}
+    					<li>
+    						<a href="{{path('show', {id: episode.season.show.id})}}">{{episode.season.show.name}}</a> :  {{episode.name}}, sortie prévue le {{episode.date | date('d/m/Y')}}.
+          				</li>
+          			{% endif %}
+          		</ul>
+          	{% endfor %}
+    	</div>
+    </section>
+{% endblock %}
